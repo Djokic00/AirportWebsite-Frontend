@@ -44,7 +44,7 @@ export default new Vuex.Store({
     },
 
     setFlightInformation(state, flight) {
-      state.flightInformation.id = flight.id;
+      // state.flightInformation.id = flight.id;
       state.flightInformation.flightDestination = flight.flightDestination;
       state.flightInformation.departure = flight.departure;
       state.flightInformation.arrival = flight.arrival;
@@ -112,7 +112,6 @@ export default new Vuex.Store({
             if (tkn.msg) {
               alert(tkn.msg);
             } else {
-              console.log("radi");
               // console.log(tkn.token)
               commit('setToken', tkn.split(" ")[1])
             }

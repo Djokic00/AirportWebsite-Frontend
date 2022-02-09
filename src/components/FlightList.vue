@@ -31,7 +31,7 @@
 
 <script>
 
-import { mapState } from 'vuex';
+import {  mapMutations , mapState } from 'vuex';
 
 export default {
   name: "FlightList",
@@ -48,7 +48,8 @@ export default {
   computed: {
     ...mapState([
       'flights',
-      'token'
+      'token',
+        'flightInformation'
     ]),
     flightsTable: function () {
       return this.flights;
@@ -60,17 +61,23 @@ export default {
     if (localStorage.token) {
       this.setToken(localStorage.token);
     }
+
   },
 
   methods: {
-    // rowClicked(record) {
-    //   console.log(record)
-    // },
-    goToReservation(record){
-      //this.$router.push({ name: 'Reservations', params: { id: this.$route.params.id} });
+
+    ...mapMutations([
+      'setFlightInformation'
+    ]),
+
+    rowClicked(record) {
+      this.setFlightInformation(record);
+    },
+    goToReservation() {
       if (this.token !== "") {
-        console.log(record)
-        this.$router.push({ name: 'Reservations', params: { record } });
+        let flightReservation = this.flightInformation
+        console.log(flightReservation);
+        this.$router.push({ name: 'Reservations', params: { flightReservation } });
       }
       else alert("You cannot make reservations. Log in first!");
     }

@@ -1,7 +1,7 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <h1>Welcome to the World of traveling</h1>
+<img alt="Vue logo" src="../assets/plane.jpg" class="img">
+<!--    <h1>Welcome to the World of traveling</h1>-->
   </div>
 </template>
 
@@ -15,3 +15,10 @@ export default {
 }
 </script>
 
+<style>
+.img {
+  width:2120px;
+  height:1080px;
+  /*object-fit: cover;*/
+}
+</style>

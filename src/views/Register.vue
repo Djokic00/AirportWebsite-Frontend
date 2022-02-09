@@ -2,34 +2,6 @@
   <div id="app">
     <Header subtitle="Create account"/>
 
-<!--    <script>-->
-<!--      function validateForm() {-->
-<!--        let x = document.forms["myForm"]["fullName"].value;-->
-<!--        if (x === "") {-->
-<!--          alert("Name must be filled out");-->
-<!--          return false;-->
-<!--        }-->
-<!--        let z = document.forms["myForm"]["email"].value;-->
-<!--        if (z === "") {-->
-<!--          alert("Email must be filled out");-->
-<!--          return false;-->
-<!--        }-->
-<!--        let q = document.forms["myForm"]["password"].value;-->
-
-<!--        if (q === "") {-->
-<!--          alert("Password must be filled out");-->
-<!--          return false;-->
-<!--        } else if (q.length<5){-->
-<!--          alert("Password smaller than 5");-->
-<!--          return false;-->
-<!--        }-->
-<!--        else if (q.length>20){-->
-<!--          alert("Password longer than 20");-->
-<!--          return false;-->
-<!--        }-->
-<!--      }-->
-
-<!--    </script>-->
 
     <b-form @submit="onSubmit">
       <form name="myForm">
@@ -90,7 +62,36 @@ export default {
       e.preventDefault();
       this.register(this.form);
       this.$router.push({ name: 'Home' });
+    },
+
+    validateForm() {
+    let fullname = document.forms["myForm"]["fullName"].value;
+    if (fullname === "") {
+      alert("Name must be filled out");
+      return false;
     }
+    let email = document.forms["myForm"]["email"].value;
+    if (email === "") {
+      alert("Email must be filled out");
+      return false;
+    }
+    let password = document.forms["myForm"]["password"].value;
+
+    if (password === "") {
+      alert("Password must be filled out");
+      return false;
+    } else if (password.length < 4) {
+      alert("Password smaller than 4");
+      return false;
+    }
+    else if (password.length > 16) {
+      alert("Password longer than 16");
+      return false;
+    }
+  }
+
+
+
   }
 }
 </script>

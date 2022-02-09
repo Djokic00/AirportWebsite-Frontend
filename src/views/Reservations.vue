@@ -1,21 +1,23 @@
 <template>
   <div id="app"  v-if="this.token">
     <Header subtitle="AAA"/>
-    <p>Your flight reservation</p>
-    <ul>
-      <li>FlightDestination: {{ reservation.flightDestination }}</li>
-      <li>Departure: {{ reservation.departure }}</li>
-      <li>Arrival: {{ reservation.arrival }}</li>
-      <li>Price: {{ reservation.price }}</li>
-      <li>Airline: {{ reservation.airline }}</li>
+    <h1>Your flight reservation</h1>
+    <ul class="list-group">
+      <li class="list-group-item">FlightDestination: {{ flightReservation.flightDestination }}</li>
+      <li class="list-group-item">Departure: {{ flightReservation.departure }}</li>
+      <li class="list-group-item">Arrival: {{ flightReservation.arrival }}</li>
+      <li class="list-group-item">Price: {{ flightReservation.price }}</li>
+      <li class="list-group-item">Airline: {{ flightReservation.airline }}</li>
+      <li class="list-group-item">Number of seats: {{ flightReservation.numberOfSeats }}</li>
+      <li class="list-group-item">Type of airplane: {{ flightReservation.typeOfAirplane }}</li>
     </ul>
+    <b-button type="submit" variant="primary" onclick="return validateForm()">Remove Reservation</b-button>
   </div>
 </template>
 
 <script>
 import Header from '@/components/Header.vue';
 import { mapActions, mapState, mapMutations } from 'vuex';
-import Flight from "@/views/Flight";
 
 export default {
   name: 'Reservations',
@@ -24,16 +26,9 @@ export default {
     Header
   },
 
-  data() {
-    return {
-      //subtitle: 'You have booked your ticked!',
-      reservation: Flight
-    }
+  props: {
+    flightReservation: Object
   },
-
-  // props: {
-  //   reservation: Object
-  // },
 
   computed: {
     ...mapState([
@@ -45,16 +40,11 @@ export default {
     if (localStorage.token) {
       this.setToken(localStorage.token);
     }
-    // this.getItem(this.$route.params.id).then( res => {
-    //   this.reservation = res;
-    //   this.subtitle = "You have booked your ticked!";
-    // });
   },
 
   methods: {
     ...mapActions([
       // 'fetchDepartments'
-      'getItem'
     ]),
 
     ...mapMutations([
