@@ -6,8 +6,10 @@ import Login from '../views/Login.vue'
 import Flight from '../views/Flight.vue'
 import Cargo from '../views/Cargo.vue'
 import Insurance from '../views/Insurance.vue'
-import Reservations from "@/views/Reservations.vue";
+import CargoReservation from "@/views/CargoReservation.vue";
 import RentACar from "@/views/RentACar";
+import FlightReservation from "@/views/FlightReservation";
+import InsuranceReservation from "@/views/InsuranceReservation";
 
 Vue.use(VueRouter)
 
@@ -16,11 +18,6 @@ const routes = [
     path: '/',
     name: 'Home',
     component: Home
-  },
-  {
-    path: '/about',
-    name: 'About',
-    component: () => import('../views/About.vue')
   },
   {
     path: '/register',
@@ -53,9 +50,21 @@ const routes = [
     component: RentACar
   },
   {
-    path: '/reservation',
-    name: 'Reservations',
-    component: Reservations,
+    path: '/flightReservation',
+    name: 'FlightReservation',
+    component: FlightReservation,
+    props: true
+  },
+  {
+    path: '/cargoReservation',
+    name: 'CargoReservation',
+    component: CargoReservation,
+    props: true
+  },
+  {
+    path: '/insuranceReservation',
+    name: 'InsuranceReservation',
+    component: InsuranceReservation,
     props: true
   },
 ]

@@ -1,12 +1,5 @@
 <template>
   <div>
-    <b-pagination
-        v-model="currentPage"
-        :total-rows="flightsTable"
-        :per-page="perPage"
-        aria-controls="image-table"
-    ></b-pagination>
-
     <b-table class="table table-hover"
         id="image-table"
         hover
@@ -25,7 +18,7 @@
         :per-page="perPage"
         aria-controls="image-table"
     ></b-pagination>
-    <b-button v-on:click="goToReservation()" >Reserve</b-button>
+    <b-button variant="primary" v-on:click="goToReservation()">Book a flight</b-button>
   </div>
 </template>
 
@@ -41,7 +34,7 @@ export default {
       fields: ['flightDestination', 'departure', 'arrival', 'price', 'airline', 'numberOfSeats', 'typeOfAirplane'],
       items: [],
       currentPage: 1,
-      perPage: 10,
+      perPage: 4,
     }
   },
 
@@ -49,15 +42,16 @@ export default {
     ...mapState([
       'flights',
       'token',
-        'flightInformation'
+      'flightInformation'
     ]),
     flightsTable: function () {
       return this.flights;
-      // .filter(book => book.libraryId == this.$route.params.id); //mora da bude == umesto ===, jer inace nece da ih nadje kada se uradi drugi put
+      // .filter(book => book.libraryId == this.$route.params.id);
     }
   },
 
   mounted() {
+    this.setFlightInformation("");
     if (localStorage.token) {
       this.setToken(localStorage.token);
     }
@@ -65,9 +59,9 @@ export default {
   },
 
   methods: {
-
     ...mapMutations([
-      'setFlightInformation'
+      'setFlightInformation',
+      'setToken'
     ]),
 
     rowClicked(record) {
@@ -76,8 +70,7 @@ export default {
     goToReservation() {
       if (this.token !== "") {
         let flightReservation = this.flightInformation
-        console.log(flightReservation);
-        this.$router.push({ name: 'Reservations', params: { flightReservation } });
+        this.$router.push({ name: 'FlightReservation', params: { flightReservation } });
       }
       else alert("You cannot make reservations. Log in first!");
     }

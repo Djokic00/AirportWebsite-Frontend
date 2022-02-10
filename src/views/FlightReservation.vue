@@ -1,6 +1,6 @@
 <template>
   <div id="app"  v-if="this.token">
-    <Header subtitle="AAA"/>
+    <Header subtitle=""/>
     <h1>Your flight reservation</h1>
     <ul class="list-group">
       <li class="list-group-item">FlightDestination: {{ flightReservation.flightDestination }}</li>
@@ -11,13 +11,13 @@
       <li class="list-group-item">Number of seats: {{ flightReservation.numberOfSeats }}</li>
       <li class="list-group-item">Type of airplane: {{ flightReservation.typeOfAirplane }}</li>
     </ul>
-    <b-button type="submit" variant="primary" onclick="return validateForm()">Remove Reservation</b-button>
+    <b-button variant="primary" v-on:click="goToFlight()">Remove Reservation</b-button>
   </div>
 </template>
 
 <script>
 import Header from '@/components/Header.vue';
-import { mapActions, mapState, mapMutations } from 'vuex';
+import {mapState, mapMutations } from 'vuex';
 
 export default {
   name: 'Reservations',
@@ -32,7 +32,8 @@ export default {
 
   computed: {
     ...mapState([
-      'token'
+      'token',
+      'flightInformation'
     ])
   },
 
@@ -43,14 +44,15 @@ export default {
   },
 
   methods: {
-    ...mapActions([
-      // 'fetchDepartments'
-    ]),
-
     ...mapMutations([
       'removeToken',
-      'setToken'
+      'setToken',
+      'setFlightInformation'
     ]),
+
+    goToFlight() {
+      this.$router.push({ name: 'Flight' });
+    },
 
     logout() {
       this.removeToken();

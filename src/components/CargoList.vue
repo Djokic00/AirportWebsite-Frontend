@@ -1,12 +1,5 @@
 <template>
   <div>
-    <b-pagination
-        v-model="currentPage"
-        :total-rows="cargoTable"
-        :per-page="perPage"
-        aria-controls="image-table"
-    ></b-pagination>
-
     <b-table class="table table-hover"
              id="image-table"
              hover
@@ -25,13 +18,13 @@
         :per-page="perPage"
         aria-controls="image-table"
     ></b-pagination>
-    <b-button v-on:click="goToReservation()">Reservation</b-button>
+    <b-button variant="primary" v-on:click="goToReservation()">Reserve</b-button>
   </div>
 </template>
 
 <script>
 
-import { mapState } from 'vuex';
+import {mapMutations, mapState} from 'vuex';
 
 export default {
   name: "CargoList",
@@ -41,33 +34,48 @@ export default {
       fields: ['productName', 'departure', 'pricePerKg', 'hazardous', 'deliveryDestination'],
       items: [],
       currentPage: 1,
-      perPage: 10,
+      perPage: 4,
     }
   },
-
-  computed: {
-    ...mapState([
-      'cargos',
-    ]),
-    cargoTable: function () {
-      return this.cargos;
-      // .filter(book => book.libraryId == this.$route.params.id); //mora da bude == umesto ===, jer inace nece da ih nadje kada se uradi drugi put
-    }
-  },
-
-  methods: {
-    rowClicked(record) {
-      console.log(record)
+    computed: {
+      ...mapState([
+        'cargos',
+        'token',
+        'cargoInformation'
+      ]),
+      cargoTable: function () {
+        return this.cargos;
+        // .filter(book => book.libraryId == this.$route.params.id);
+      }
     },
-    goToReservation(record){
-      //this.$router.push({ name: 'Reservations', params: { id: this.$route.params.id} });
-      //if (localStorage.token != null) {
-      this.$router.push({ name: 'Reservations', params: {record} });
-      //}
-      //else alert("You cannot make reservations. Log in first!");
+
+    mounted() {
+      this.setCargoInformation("");
+      if (localStorage.token) {
+        this.setToken(localStorage.token);
+      }
+
+    },
+
+    methods: {
+
+      ...mapMutations([
+        'setCargoInformation',
+        'setToken'
+      ]),
+
+      rowClicked(record) {
+        this.setCargoInformation(record);
+      },
+      goToReservation() {
+        if (this.token !== "") {
+          let cargoReservation = this.cargoInformation
+          this.$router.push({ name: 'CargoReservation', params: { cargoReservation } });
+        }
+        else alert("You cannot make reservations. Log in first!");
+      }
     }
   }
-}
 </script>
 
 

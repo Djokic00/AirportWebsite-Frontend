@@ -29,7 +29,7 @@ export default new Vuex.Store({
 
   mutations: {
     setToken(state, token) {
-      console.log(token);
+      //console.log(token);
       state.token = token;
       localStorage.token = token;
     },
@@ -44,7 +44,6 @@ export default new Vuex.Store({
     },
 
     setFlightInformation(state, flight) {
-      // state.flightInformation.id = flight.id;
       state.flightInformation.flightDestination = flight.flightDestination;
       state.flightInformation.departure = flight.departure;
       state.flightInformation.arrival = flight.arrival;
@@ -181,12 +180,6 @@ export default new Vuex.Store({
     },
 
 
-    // // socket_addbook({ commit }, bookToAdd) { //bilo originalno korisceno onda se koristi ovaj ispod
-    // //   const book = JSON.parse(bookToAdd);
-    // //   // console.log(book)
-    // //    commit('addOneBook', bookToAdd);
-    // // },
-    //
     // socket_updateBook({ commit }, book) {
     //   const bookNew = JSON.parse(book);
     //   console.log("nadajmo se knjiga")

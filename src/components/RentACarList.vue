@@ -1,12 +1,5 @@
 <template>
   <div>
-    <b-pagination
-        v-model="currentPage"
-        :total-rows="carTable"
-        :per-page="perPage"
-        aria-controls="image-table"
-    ></b-pagination>
-
     <b-table class="table table-hover"
              id="image-table"
              hover
@@ -25,7 +18,7 @@
         :per-page="perPage"
         aria-controls="image-table"
     ></b-pagination>
-    <b-button v-on:click="goToReservation()">Reservation</b-button>
+    <b-button variant="primary" v-on:click="goToReservation()">Rent a car</b-button>
   </div>
 </template>
 
@@ -41,7 +34,7 @@ export default {
       fields: ['carName', 'pricePerDay', 'yearOfProduction', 'fuelConsumption', 'numberOfSeats', 'numberOfCars'],
       items: [],
       currentPage: 1,
-      perPage: 10,
+      perPage: 4,
     }
   },
 
